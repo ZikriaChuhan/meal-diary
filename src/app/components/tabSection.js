@@ -1,5 +1,7 @@
 "use client";
+import {Card, Skeleton} from "@nextui-org/react";
 import { useState, useEffect } from "react";
+import Swal from "sweetalert2";
 import Image from "next/image";
 import DeleteIcon from "../images/delete.svg"
 import "./tabSection.css";
@@ -11,7 +13,6 @@ export default function TabSection() {
   const [weeks, setWeeks] = useState([[], [], [], []]); 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedWeek, setSelectedWeek] = useState(null);
-  const [loading, setLoading] = useState(true);
 
 
 
@@ -25,21 +26,23 @@ export default function TabSection() {
         setRecipes(data.recipes);
       } catch (error) {
         console.error("Error fetching data:", error);
-      } finally {
-        setLoading(false);
-      }
+      } 
     };
     fetchData();
   }, []);
 
   const handleAddToWeek = () => {
     if (selectedWeek === null) {
-      alert("Please select a week before saving!");
+      Swal.fire("Please select a week before saving!");
       return;
     }
   
     if (weeks[selectedWeek].some((meal) => meal.id === selectedRecipe.id)) {
-      alert("This meal is already added to the selected week!");
+      Swal.fire({
+        icon: "info",
+        title: "Duplicate Meal",
+        text: "This meal is already added to the selected week!",
+      });
       return;
     }
   
@@ -113,7 +116,22 @@ export default function TabSection() {
                     </div>
                   </div>  ))
 ) : (
-  <p>No meals available.</p>
+  <Card className="w-[200px] space-y-5 p-4" radius="lg">
+  <Skeleton className="rounded-lg">
+    <div className="h-24 rounded-lg bg-default-300"></div>
+  </Skeleton>
+  <div className="space-y-3">
+    <Skeleton className="w-3/5 rounded-lg">
+      <div className="h-3 w-3/5 rounded-lg bg-default-200"></div>
+    </Skeleton>
+    <Skeleton className="w-4/5 rounded-lg">
+      <div className="h-3 w-4/5 rounded-lg bg-default-200"></div>
+    </Skeleton>
+    <Skeleton className="w-2/5 rounded-lg">  
+      <div className="h-3 w-2/5 rounded-lg bg-default-300"></div>
+    </Skeleton>
+  </div>
+</Card>
 )}
               </div>
             )}
@@ -122,47 +140,51 @@ export default function TabSection() {
               activeTab <= 4 && (
                 <div className="tab-panel">
 
-                  <div>
+                
                     {weeks[activeTab - 1].length > 0 ? (
-                      weeks[activeTab - 1].map((meal, index) => (
-                        <div key={index} 
-                          className="meal-card">
-                          <div className="card">
-                            <div className="card-img">
-                              <img src={meal.image} alt="Card-img" />
-                              <span className="badge">Dinner</span>
-                              <span className="delete-badge" onClick={() => removeMealFromWeek(meal, index)}>
-                                <Image src={DeleteIcon} width={50} height={50} alt="Delete Icon"  />
-                              </span>
-                            </div>
-                            <div className="card-content">
-                              <h3 className="card-head">{meal.name}</h3>
-                              <p className="card-description">
-                                <strong>Instructions:</strong><br />
-                                {meal.instructions.slice(0, 4).map((instruction, i) => (
-                                  <span key={i} className="instruction-text">
-                                    {i + 1}. {instruction}<br />
-                                  </span>
-                                ))}
+                     weeks[activeTab - 1].map((meal, mealIndex) => (
+                      <div key={mealIndex} className="meal-card">
+                        <div className="card">
+                          <div className="card-img">
+                            <img src={meal.image} alt="Card-img" />
+                            <span className="badge">Dinner</span>
+                            <span
+                              className="delete-badge"
+                              onClick={() => removeMealFromWeek(meal, activeTab - 1)}
+                            >
+                              <Image src={DeleteIcon} width={50} height={50} alt="Delete Icon" />
+                            </span>
+                          </div>
+                          <div className="card-content">
+                            <h3 className="card-head">{meal.name}</h3>
+                            <p className="card-description">
+                              <strong>Instructions:</strong>
+                              <br />
+                              {meal.instructions.slice(0, 4).map((instruction, i) => (
+                                <span key={i} className="instruction-text">
+                                  {i + 1}. {instruction}
+                                  <br />
+                                </span>
+                              ))}
+                            </p>
+                            <div className="card-footer">
+                              <p>
+                                <strong>Cuisine:</strong> {meal.cuisine}
                               </p>
-                              <div className="card-footer">
-                                <p>
-                                  <strong>Cuisine:</strong> {meal.cuisine}
-                                </p>
-                                <p>
-                                  <strong>Rating:</strong> {meal.rating}
-                                  <span className="stars"> ★★★★</span>
-                                </p>
-                              </div>
-
+                              <p>
+                                <strong>Rating:</strong> {meal.rating}
+                                <span className="stars"> ★★★★</span>
+                              </p>
                             </div>
                           </div>
                         </div>
-                      ))
+                      </div>
+                    ))
+                    
                     ) : (
                       <p>No meals added yet.</p>
                     )}
-                  </div>
+               
                 </div>
               )}
 
