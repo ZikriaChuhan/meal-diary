@@ -1,5 +1,4 @@
 "use client";
-import {Card, Skeleton} from "@nextui-org/react";
 import { useState, useEffect } from "react";
 import Swal from "sweetalert2";
 import Image from "next/image";
