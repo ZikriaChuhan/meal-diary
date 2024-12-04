@@ -7,7 +7,7 @@ export default function Home() {
     <>
     <Header />
     <TabSection />
-    <h1>asd</h1>
+    
     </>
   );
 }

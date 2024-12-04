@@ -1,71 +1,239 @@
-
-
 .tab-Section {
-    background: linear-gradient(to right, rgba(250, 244, 238, 1), rgba(250, 234, 247, 1), rgba(228, 243, 250, 1));
-    
+  background: linear-gradient(to right, rgba(250, 244, 238, 1), rgba(250, 234, 247, 1), rgba(228, 243, 250, 1));
+  
 }
 
-.tab-Section h3{
-    font-size: 25px;
-    font-weight: 600 !important;   
-    
+.tab-Section .sec-head{
+  font-size: 25px;
+  font-weight: 600 !important;   
+}
+
+.tabs-header {
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.tab-button {
+  padding: 10px 20px;
+  border: none;
+  background: none;
+  font-size: 14px;
+  cursor: pointer;
+  color: #000000;
+  border-bottom: 2px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.tab-button:hover {
+  color: #004370;
+}
+
+.tab-button.active {
+  color: #004370;
+  font-weight: bold;
+  border-bottom: 4px solid #004370;
+}
+
+.add-to-week {
+  padding: 10px 35px;
+  background-color: #004370;
+  border: 2px solid #004370;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 13px;
+  transition: all 0.3s ease;
+}
+
+.add-to-week:hover {
+  background-color: #ffffff;
+  color: #004370;
+  border: 2px solid #004370;
+}
+.add-to-week.disabled {
+  cursor: not-allowed;
 }
 
 
-  .tabs-header {
-    background-color: white;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-  
-  .tab-button {
-    padding: 10px 20px;
-    border: none;
-    background: none;
-    font-size: 14px;
-    cursor: pointer;
-    color: #000000;
-    border-bottom: 2px solid transparent;
-    transition: all 0.3s ease;
-  }
-  
-  .tab-button:hover {
-    color: #004370;
-  }
-  
-  .tab-button.active {
-    color: #004370;
-    font-weight: bold;
-    border-bottom: 4px solid #004370;
-  }
-  
-  .add-to-week {
-    padding: 10px 35px;
-    background-color: #004370;
-    border: 2px solid #004370;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 13px;
-    transition: all 0.3s ease;
-  }
-  
-  .add-to-week:hover {
-    background-color: #ffffff;
-    color: #004370;
-    border: 2px solid #004370;
-  }
-  
- 
-  .tabs-content {
-    padding: 20px;
-    background: #f9f9f9;
-    border-radius: 10px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  .tab-panel {
-    text-align: left;
-  }
+.tabs-content {
+  padding: 20px;
+}
+
+.tab-panel {
+  text-align: left;
+  margin: 10px ;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+}
+
+
+/* Card Container */
+.card {
+  width: 380px;
+  background: #fff;
+  border-radius: 15px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  padding: 20px;
+}
+.card-img {
+  position: relative;
+}
+
+.card-img img {
+  width: 100%;
+  height: auto;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+}
+
+.badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: #000;
+  color: #fff;
+  padding: 5px 30px;
+  font-size: 10px;
+  font-weight: bold;
+  border-radius: 5px;
+}
+.delete-badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: 30px;
+  background: #ffd0d0;
+  color: #ff0b0b;
+  padding: 5px 5px;
+  font-size: 10px;
+  font-weight: bold;
+  border-radius: 1px;
+}
+
+.card-content {
+  padding-top: 15px;
+}
+
+.card-head {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  display: block;
+  max-width: 360px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.card-description {
+  font-size: 15px;
+  color: #555;
+  margin-bottom: 15px;
+}
+.instruction-text {
+  display: block;
+  max-width: 360px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 16px;
+  color: #202020;
+}
+
+.stars {
+  color: #004370;
+  font-size: 22px;
+}
+.meal-card {
+  cursor: pointer;
+  transition: transform 0.3s ease; 
+  border-radius: 15px;
+  border: 0px solid;
+}
+
+.meal-card.selected {
+  border: 2px solid #004370; 
+}
+.meal-card:hover {
+  transform: translateY(-5px); 
+}
+
+
+
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.modal h2{
+  font-size: 24px;
+  font-weight: bold;
+  margin: 26px 0px;
+}
+.modal {
+  position: relative;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.close-modal {
+  font-weight: bold;
+  color: rgb(175, 175, 175);
+  border: none;
+  padding: 10px 10px;
+  cursor: pointer;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+}
+
+
+.week-button {
+  padding: 10px 30px;
+  margin: 15px 5px 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f0f0f0;
+  cursor: pointer;
+}
+
+.week-button.selected {
+  background-color: #c4e0ff;
+  border-color: #c4e0ff;
+}
+
+.save-button {
+  margin-top: 10px;
+  padding: 10px 20px;
+  background-color: #004370;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.save-button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}

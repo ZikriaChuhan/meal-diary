@@ -13,3 +13,6 @@
   box-sizing: border-box;
   font-family: Poppin , Courier, monospace;
 }
+body {
+  background: linear-gradient(to right, rgba(250, 244, 238, 1), rgba(250, 234, 247, 1), rgba(228, 243, 250, 1));
+}
